@@ -13,16 +13,19 @@ class Player {
     }
 
     update() {
-        // Apply gravity
-        if (!this.onGround) {
-            this.velocity[1] += this.gravity;
-        }
-
         // Check collisions and update position
-        const collision = Physics.checkCollision(this.position, this.velocity, this.world);
-        this.position = collision.position;
-        this.velocity = collision.velocity;
-        this.onGround = collision.onGround;
+        const collision = Physics.checkCollision(
+            this.position,
+            this.velocity,
+            this.world
+        );
+
+        // Ensure we have valid values before updating
+        if (collision && collision.position && collision.velocity) {
+            this.position = collision.position;
+            this.velocity = collision.velocity;
+            this.onGround = collision.onGround;
+        }
 
         // Update chunk loading based on player position
         this.world.updateLoadedChunks(
@@ -38,10 +41,15 @@ class Player {
         const sin = Math.sin(-angle);  // Negate for camera direction
         const cos = Math.cos(-angle);
         
-        // Set movement velocity
-        // Forward is in camera's look direction
-        this.velocity[0] = (-forward * sin + right * cos) * this.speed;
-        this.velocity[2] = (-forward * cos - right * sin) * this.speed;
+        // Create new velocity vector instead of modifying directly
+        const newVelX = (-forward * sin + right * cos) * this.speed;
+        const newVelZ = (-forward * cos - right * sin) * this.speed;
+        
+        // Only update if we have valid values
+        if (isFinite(newVelX) && isFinite(newVelZ)) {
+            this.velocity[0] = newVelX;
+            this.velocity[2] = newVelZ;
+        }
     }
 
     jump() {
