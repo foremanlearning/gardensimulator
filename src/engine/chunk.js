@@ -84,18 +84,18 @@ class Chunk {
             if (normal[2] === 1) { // Front face
                 if (neighbors[0] !== 0) return; // Skip if blocked
                 vertices.push(
-                    pos[0], pos[1], pos[2]+1, tex.u1, tex.v1,
-                    pos[0]+1, pos[1], pos[2]+1, tex.u2, tex.v1,
-                    pos[0]+1, pos[1]+1, pos[2]+1, tex.u2, tex.v2,
-                    pos[0], pos[1]+1, pos[2]+1, tex.u1, tex.v2
+                    pos[0], pos[1], pos[2]+1, tex.u1, tex.v2,      // Bottom-left
+                    pos[0]+1, pos[1], pos[2]+1, tex.u2, tex.v2,    // Bottom-right
+                    pos[0]+1, pos[1]+1, pos[2]+1, tex.u2, tex.v1,  // Top-right
+                    pos[0], pos[1]+1, pos[2]+1, tex.u1, tex.v1     // Top-left
                 );
             } else if (normal[2] === -1) { // Back face
                 if (neighbors[1] !== 0) return; // Skip if blocked
                 vertices.push(
-                    pos[0]+1, pos[1], pos[2], tex.u1, tex.v1,
-                    pos[0], pos[1], pos[2], tex.u2, tex.v1,
-                    pos[0], pos[1]+1, pos[2], tex.u2, tex.v2,
-                    pos[0]+1, pos[1]+1, pos[2], tex.u1, tex.v2
+                    pos[0]+1, pos[1], pos[2], tex.u1, tex.v2,      // Bottom-left
+                    pos[0], pos[1], pos[2], tex.u2, tex.v2,        // Bottom-right
+                    pos[0], pos[1]+1, pos[2], tex.u2, tex.v1,      // Top-right
+                    pos[0]+1, pos[1]+1, pos[2], tex.u1, tex.v1     // Top-left
                 );
             } else if (normal[1] === 1) { // Top face
                 if (neighbors[2] !== 0) return; // Skip if blocked
@@ -116,18 +116,18 @@ class Chunk {
             } else if (normal[0] === 1) { // Right face
                 if (neighbors[4] !== 0) return; // Skip if blocked
                 vertices.push(
-                    pos[0]+1, pos[1], pos[2], tex.u1, tex.v1,
-                    pos[0]+1, pos[1], pos[2]+1, tex.u2, tex.v1,
-                    pos[0]+1, pos[1]+1, pos[2]+1, tex.u2, tex.v2,
-                    pos[0]+1, pos[1]+1, pos[2], tex.u1, tex.v2
+                    pos[0]+1, pos[1], pos[2], tex.u1, tex.v2,      // Bottom-left
+                    pos[0]+1, pos[1]+1, pos[2], tex.u1, tex.v1,    // Top-left
+                    pos[0]+1, pos[1]+1, pos[2]+1, tex.u2, tex.v1,  // Top-right
+                    pos[0]+1, pos[1], pos[2]+1, tex.u2, tex.v2     // Bottom-right
                 );
             } else if (normal[0] === -1) { // Left face
                 if (neighbors[5] !== 0) return; // Skip if blocked
                 vertices.push(
-                    pos[0], pos[1], pos[2], tex.u2, tex.v1,
-                    pos[0], pos[1]+1, pos[2], tex.u2, tex.v2,
-                    pos[0], pos[1]+1, pos[2]+1, tex.u1, tex.v2,
-                    pos[0], pos[1], pos[2]+1, tex.u1, tex.v1
+                    pos[0], pos[1], pos[2]+1, tex.u1, tex.v2,      // Bottom-left
+                    pos[0], pos[1]+1, pos[2]+1, tex.u1, tex.v1,    // Top-left
+                    pos[0], pos[1]+1, pos[2], tex.u2, tex.v1,      // Top-right
+                    pos[0], pos[1], pos[2], tex.u2, tex.v2         // Bottom-right
                 );
             }
         };

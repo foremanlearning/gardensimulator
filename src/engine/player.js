@@ -7,8 +7,8 @@ class Player {
         this.velocity = [0, 0, 0];
         this.rotation = [0, 0, 0];
         this.speed = 0.04;
-        this.jumpForce = 0.3;
-        this.gravity = -0.015;
+        this.jumpForce = 0.42;
+        this.gravity = -0.012;
         this.onGround = false;
     }
 
